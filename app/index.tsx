@@ -3,8 +3,10 @@ import { StatusBar } from "expo-status-bar";
 import { Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import "expo-dev-client";
+import { useUserContext } from "../context/UserContext";
 export default function App() {
-  return <Redirect href="/signIn" />;
+  const { isLoggedIn, isLoading } = useUserContext();
+  if (!isLoading && isLoggedIn) return <Redirect href="/Dashboard" />;
   return (
     <SafeAreaView className="flex-1">
       <View className="bg-orange-500 flex-1 items-center justify-center">
