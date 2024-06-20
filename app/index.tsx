@@ -6,7 +6,7 @@ import "expo-dev-client";
 import { useUserContext } from "../context/UserContext";
 export default function App() {
   const { isLoggedIn, isLoading } = useUserContext();
-  if (!isLoading && isLoggedIn) return <Redirect href="/Dashboard" />;
+  if (!isLoading && isLoggedIn) return <Redirect href="/Home" />;
   return (
     <SafeAreaView className="flex-1">
       <View className="bg-orange-500 flex-1 items-center justify-center">
