@@ -2,7 +2,7 @@ import { View, Text, TouchableOpacity } from "react-native";
 import React from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { GoogleSignin } from "@react-native-google-signin/google-signin";
-import { useUserContext } from "../../context/UserContext";
+import { useUserContext } from "../../../context/UserContext";
 import { router } from "expo-router";
 
 const Profile = () => {
