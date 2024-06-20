@@ -19,7 +19,7 @@ const _layout = () => {
           }}
         />
         <Stack.Screen
-          name="(drawer)"
+          name="(tabs)"
           options={{
             headerShown: false,
           }}
