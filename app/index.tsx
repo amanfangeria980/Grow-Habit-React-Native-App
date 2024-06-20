@@ -2,7 +2,7 @@ import { Redirect, router } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-
+import "expo-dev-client";
 export default function App() {
   return <Redirect href="/signIn" />;
   return (

@@ -7,6 +7,8 @@ node_modules/
 .expo/
 dist/
 web-build/
+android/
+ios/
 
 # Native
 *.orig.*
@@ -33,3 +35,7 @@ yarn-error.*
 
 # typescript
 *.tsbuildinfo
+
+# google-services.json
+# GoogleService-Info.plist
+.env

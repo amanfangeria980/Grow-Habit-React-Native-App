@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "287730716598",
+    "project_id": "grow-habit-8a333",
+    "storage_bucket": "grow-habit-8a333.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:287730716598:android:4a6e223bf42dfe97657b17",
+        "android_client_info": {
+          "package_name": "com.amanfang.growhabit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "287730716598-r75of45f79gndd6mvophqh3ttqb6nrsi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.amanfang.growhabit",
+            "certificate_hash": "6b5e0e2b3c444326e0c19d973ea39e8a823ca41f"
+          }
+        },
+        {
+          "client_id": "287730716598-fda5snuovs28to27dne4uoljkl0mgfmj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyApTiyKqdggCWKidwJ-iKe-nz4VARgF_q0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "287730716598-fda5snuovs28to27dne4uoljkl0mgfmj.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "287730716598-ruhj3mhqk9kle9sv4mk3jat8jgol7pkf.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.amanfang.growhabit"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
