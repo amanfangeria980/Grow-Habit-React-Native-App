@@ -24,12 +24,6 @@ const _layout = () => {
             headerShown: false,
           }}
         />
-        <Stack.Screen
-          name="(extras)"
-          options={{
-            headerShown: false,
-          }}
-        />
       </Stack>
     </UserContextProvider>
   );
