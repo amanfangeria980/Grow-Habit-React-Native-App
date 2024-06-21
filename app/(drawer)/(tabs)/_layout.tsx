@@ -3,10 +3,15 @@ import React from "react";
 import { Tabs } from "expo-router";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import { DrawerToggleButton } from "@react-navigation/drawer";
 
 const _layout = () => {
   return (
-    <Tabs screenOptions={{}}>
+    <Tabs
+      screenOptions={{
+        headerLeft: () => <DrawerToggleButton />,
+      }}
+    >
       <Tabs.Screen
         name="Home"
         options={{
