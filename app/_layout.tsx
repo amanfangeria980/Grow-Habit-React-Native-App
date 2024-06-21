@@ -24,6 +24,12 @@ const _layout = () => {
             headerShown: false,
           }}
         />
+        <Stack.Screen
+          name="(commitment)"
+          options={{
+            headerTitle: "My Commitments",
+          }}
+        />
       </Stack>
     </UserContextProvider>
   );
