@@ -8,7 +8,7 @@ const UserContext = createContext(null);
 export const useUserContext = () => useContext(UserContext);
 
 const UserContextProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState({});
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {

@@ -1,5 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useUserContext } from "../context/UserContext";
+import firestore from "@react-native-firebase/firestore";
 
 export const printAsyncStorage = () => {
   AsyncStorage.getAllKeys((err, keys) => {
@@ -22,3 +23,36 @@ export const getCurrentUser = async () => {
     return null;
   }
 };
+
+export async function fetchAndPrintUsers() {
+  try {
+    const usersCollection = await firestore().collection("Users").get();
+    console.log("Total users: ", usersCollection.size);
+
+    usersCollection.forEach((documentSnapshot) => {
+      console.log("User ID: ", documentSnapshot.id, documentSnapshot.data());
+    });
+  } catch (error) {
+    console.error("Error fetching users collection: ", error);
+  }
+}
+
+export async function checkUserExists(userId) {
+  try {
+    const userDocument = await firestore()
+      .collection("Users")
+      .doc(userId)
+      .get();
+
+    if (userDocument.exists) {
+      // console.log("User exists: ", userDocument.id, userDocument.data());
+      return true;
+    } else {
+      // console.log("User does not exist.");
+      return false;
+    }
+  } catch (error) {
+    console.error("Error checking user existence: ", error);
+    return false; // or you could throw an error, based on your use case
+  }
+}

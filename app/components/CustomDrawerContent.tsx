@@ -7,6 +7,9 @@ const CustomDrawerContent = (props) => {
   const { user } = useUserContext();
   const pathname = usePathname();
 
+  if (!user) {
+    return null;
+  }
   return (
     <DrawerContentScrollView {...props}>
       <View className="flex flex-row px-3 py-5 border-b border-b-orange-300 mb-6 gap-4">
