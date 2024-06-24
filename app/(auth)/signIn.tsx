@@ -50,7 +50,6 @@ const SignIn: React.FC = () => {
       router.replace("/Home");
     } catch (error) {
       Alert.alert("Error", error.message);
-      console.error("SignIn error: ", error);
     } finally {
       setIsLoading(false);
       setIsSigningIn(false);
