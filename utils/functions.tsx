@@ -91,6 +91,7 @@ export const fetchCommitments = async (userId) => {
     const commitmentsCollection = await firestore()
       .collection("Commitments")
       .where("userId", "==", userId)
+      .orderBy("createdOn", "desc")
       .get()
       .then((querySnapshot) => {
         console.log("Total commitments: ", querySnapshot.size);
@@ -101,7 +102,7 @@ export const fetchCommitments = async (userId) => {
           });
         });
       });
-    console.log(commitments);
+    // console.log(commitments);
     return commitments;
   } catch (error) {
     console.log("Error fetching commitments collection: ", error);

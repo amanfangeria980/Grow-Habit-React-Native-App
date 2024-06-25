@@ -53,6 +53,7 @@ const CommitmentForm = (props) => {
         gatewayStatement: "",
         plusStatement: "",
         eliteStatement: "",
+        createdOn: new Date(),
       }}
       onSubmit={(values) => {
         // console.log(JSON.stringify(values, null, 2));
