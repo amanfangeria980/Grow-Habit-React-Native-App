@@ -1,4 +1,3 @@
-// Formik x React Native example
 import React from "react";
 import { Text, TextInput, View, TouchableOpacity } from "react-native";
 import { Formik } from "formik";
