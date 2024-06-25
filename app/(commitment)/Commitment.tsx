@@ -16,6 +16,7 @@ const renderCommitmentItem = ({ item }) => (
   </TouchableOpacity>
 );
 const Commitment = () => {
+  const { refreshing, setRefreshing } = useUserContext();
   const [commitments, setCommitments] = useState([]);
   const { user } = useUserContext();
   useEffect(() => {
@@ -23,14 +24,14 @@ const Commitment = () => {
       try {
         const commitmentsData = await fetchCommitments(user.id);
         setCommitments(commitmentsData);
-        console.log(commitmentsData); // Logging fetched commitments for verification
       } catch (error) {
         console.error("Error fetching commitments:", error);
       }
     };
 
     fetchCommitmentsData();
-  }, []);
+    setRefreshing(false);
+  }, [refreshing]);
 
   return (
     <View className="flex-1 p-4">

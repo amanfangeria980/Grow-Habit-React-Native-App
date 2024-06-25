@@ -21,9 +21,9 @@ let commitmentSchema = object({
 });
 
 const CommitmentForm = (props) => {
-  const { user } = useUserContext();
+  const { user, setRefreshing, refreshing } = useUserContext();
   const addToFirebase = async (values) => {
-    const currentTimeDate = new Date();
+    // const currentTimeDate = new Date();
     const logs = await firestore().collection("Logs").add({
       logBook: [],
     });
@@ -44,6 +44,8 @@ const CommitmentForm = (props) => {
         userId: user.id,
         logId: logs.id,
       });
+    setRefreshing(true);
+    // console.log(refreshing);
   };
   return (
     <Formik

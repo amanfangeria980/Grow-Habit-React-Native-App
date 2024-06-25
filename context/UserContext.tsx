@@ -11,6 +11,7 @@ const UserContextProvider = ({ children }) => {
   const [user, setUser] = useState({});
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [refreshing, setRefreshing] = useState(false);
   useEffect(() => {
     GoogleSignin.configure({
       webClientId:
@@ -44,6 +45,8 @@ const UserContextProvider = ({ children }) => {
         setIsLoggedIn,
         isLoading,
         setIsLoading,
+        refreshing,
+        setRefreshing,
       }}
     >
       {children}

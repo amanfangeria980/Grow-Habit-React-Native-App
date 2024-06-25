@@ -94,7 +94,7 @@ export const fetchCommitments = async (userId) => {
       .orderBy("createdOn", "desc")
       .get()
       .then((querySnapshot) => {
-        console.log("Total commitments: ", querySnapshot.size);
+        // console.log("Total commitments: ", querySnapshot.size);
         querySnapshot.forEach((documentSnapshot) => {
           commitments.push({
             commitmentid: documentSnapshot.id,
