@@ -41,6 +41,11 @@ const SignIn: React.FC = () => {
           email: userData.user.email,
           userPhoto: userData.user.photo,
           dob: "",
+          phoneNumber: "",
+          gender: "",
+          about: "",
+          place: "",
+          takatakStatus: false,
         });
         console.log("User added to Firestore!");
       }
