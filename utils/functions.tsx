@@ -48,11 +48,39 @@ export async function checkUserExists(userId) {
       // console.log("User exists: ", userDocument.id, userDocument.data());
       return true;
     } else {
-      // console.log("User does not exist.");
       return false;
     }
   } catch (error) {
     console.error("Error checking user existence: ", error);
-    return false; // or you could throw an error, based on your use case
+    return false;
   }
 }
+
+export const formatDateDDMMYYYY = (date) => {
+  const day = String(date.getDate()).padStart(2, "0");
+  const month = String(date.getMonth() + 1).padStart(2, "0"); // Months are 0-based
+  const year = String(date.getFullYear()).slice(-2); // Get last 2 digits of the year
+
+  return `${day}-${month}-${year}`;
+};
+
+export const formatTimeHHMMSS = (date) => {
+  const hours = String(date.getHours()).padStart(2, "0");
+  const minutes = String(date.getMinutes()).padStart(2, "0");
+  const seconds = String(date.getSeconds()).padStart(2, "0");
+
+  return `${hours}:${minutes}:${seconds}`;
+};
+
+export const getDayOfWeek = (date) => {
+  const daysOfWeek = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+  return daysOfWeek[date.getDay()];
+};
