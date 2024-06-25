@@ -47,7 +47,7 @@ const SignIn: React.FC = () => {
           place: "",
           takatakStatus: false,
         });
-        console.log("User added to Firestore!");
+        // console.log("User added to Firestore!");
       }
 
       await auth().signInWithCredential(googleCredential);

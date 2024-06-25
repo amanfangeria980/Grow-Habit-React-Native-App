@@ -84,3 +84,27 @@ export const getDayOfWeek = (date) => {
   ];
   return daysOfWeek[date.getDay()];
 };
+
+export const fetchCommitments = async (userId) => {
+  try {
+    const commitments = [];
+    const commitmentsCollection = await firestore()
+      .collection("Commitments")
+      .where("userId", "==", userId)
+      .get()
+      .then((querySnapshot) => {
+        console.log("Total commitments: ", querySnapshot.size);
+        querySnapshot.forEach((documentSnapshot) => {
+          commitments.push({
+            commitmentid: documentSnapshot.id,
+            ...documentSnapshot.data(),
+          });
+        });
+      });
+    console.log(commitments);
+    return commitments;
+  } catch (error) {
+    console.log("Error fetching commitments collection: ", error);
+    return [];
+  }
+};
