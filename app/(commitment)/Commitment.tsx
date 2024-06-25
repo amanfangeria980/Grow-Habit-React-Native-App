@@ -39,7 +39,9 @@ const Commitment = () => {
         data={commitments}
         renderItem={renderCommitmentItem}
         keyExtractor={(item) => item.commitmentid}
-        ListEmptyComponent={<Text>No commitments found</Text>}
+        ListEmptyComponent={
+          <Text className="mx-auto">No commitments found</Text>
+        }
       />
       <TouchableOpacity
         className="absolute right-2 bottom-8"
