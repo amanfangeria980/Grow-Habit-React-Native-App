@@ -8,6 +8,7 @@ const Home = () => {
     const [commitments, setCommitments] = useState([]);
     const { user } = useUserContext();
     useEffect(() => {
+        // Fetch Commitments
         const fetchCommitmentsData = async () => {
             try {
                 const commitmentsData = await fetchCommitments(user.id);
@@ -16,18 +17,19 @@ const Home = () => {
                 console.error("Error fetching commitments:", error);
             }
         };
+
         fetchCommitmentsData();
     }, []);
     return (
         <ScrollView className="flex-1">
             <View className="flex-1">
-                <Text className="mx-auto font-bold text-2xl mt-2">
+                <Text className="mx-auto font-bold text-2xl mt-1">
                     Reflection Form
                 </Text>
-                <Text className="mx-auto font-bold text-2xl mt-2">
-                    {commitments[commitments.length - 1]?.habitName}
+                <Text className="mx-auto font-semibold text-lg mt-2 mb-2">
+                    ({commitments[0]?.habitName})
                 </Text>
-                <DailyReflectionForm />
+                <DailyReflectionForm commitmentId={commitments[0]?.logId} />
             </View>
         </ScrollView>
     );

@@ -5,7 +5,7 @@ import { router } from "expo-router";
 import { Picker } from "@react-native-picker/picker";
 
 import { object, string, number, date, boolean } from "yup";
-import firestore from "@react-native-firebase/firestore";
+import firestore, { arrayUnion } from "@react-native-firebase/firestore";
 let logSchema = object({
     createdOn: date().default(() => new Date()),
     commitmentStatus: string().required("Please enter Commitment Status!"),
@@ -18,16 +18,13 @@ let logSchema = object({
 
 const DailyReflectionForm = (props) => {
     const addToFirebase = async (values) => {
-        // // to change
-        // const logs = await firestore().collection("Logs").add({
-        //   logBook: [],
-        // });
+        await firestore()
+            .collection("Logs")
+            .doc(props.commitmentId)
+            .update({
+                logBook: firestore.FieldValue.arrayUnion(values),
+            });
 
-        // await firestore()
-        //   .collection("Commitments")
-        //   .add({
-        //     ...values,
-        //   });
         console.log(values);
     };
     return (
@@ -41,7 +38,7 @@ const DailyReflectionForm = (props) => {
             }}
             onSubmit={(values, { resetForm }) => {
                 console.log(JSON.stringify(values, null, 2));
-                // addToFirebase(values);
+                addToFirebase(values);
                 // router.back();
                 console.log("Added the log");
                 resetForm();
