@@ -1,6 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useUserContext } from "../context/UserContext";
 import firestore from "@react-native-firebase/firestore";
+import { G } from "react-native-svg";
 
 export const printAsyncStorage = () => {
     AsyncStorage.getAllKeys((err, keys) => {
@@ -112,4 +113,22 @@ export const fetchCommitments = async (userId) => {
         console.log("Error fetching commitments collection: ", error);
         return [];
     }
+};
+
+export const isReflectionSheetFilledForToday = async (logId) => {
+    const data = await firestore()
+        .collection("Logs")
+        .doc(logId)
+        .get()
+        .then((documentSnapshot) => {
+            return documentSnapshot.data();
+        });
+    const logBook = data?.logBook || [];
+    if (logBook.length === 0) {
+        return false;
+    }
+    const today = new Date().toISOString().split("T")[0];
+    const lastEntry = logBook[logBook.length - 1];
+    const logDate = lastEntry.createdOn.toDate().toISOString().split("T")[0];
+    return logDate === today;
 };
