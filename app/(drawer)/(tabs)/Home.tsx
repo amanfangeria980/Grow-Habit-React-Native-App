@@ -22,10 +22,10 @@ const Home = () => {
         <ScrollView className="flex-1">
             <View className="flex-1">
                 <Text className="mx-auto font-bold text-2xl mt-2">
-                    Today's Task
+                    Reflection Form
                 </Text>
                 <Text className="mx-auto font-bold text-2xl mt-2">
-                    {commitments[commitments.length - 1]?.habitDescription}
+                    {commitments[commitments.length - 1]?.habitName}
                 </Text>
                 <DailyReflectionForm />
             </View>
