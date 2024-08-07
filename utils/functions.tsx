@@ -90,6 +90,24 @@ export const getDayOfWeek = (date) => {
     return daysOfWeek[date.getDay()];
 };
 
+export const getMonthUtil = (monthNum) => {
+    const monthsOfYear = [
+        { name: "January", number: 1 },
+        { name: "February", number: 2 },
+        { name: "March", number: 3 },
+        { name: "April", number: 4 },
+        { name: "May", number: 5 },
+        { name: "June", number: 6 },
+        { name: "July", number: 7 },
+        { name: "August", number: 8 },
+        { name: "September", number: 9 },
+        { name: "October", number: 10 },
+        { name: "November", number: 11 },
+        { name: "December", number: 12 },
+    ];
+    return monthsOfYear[monthNum];
+};
+
 export const fetchCommitments = async (userId) => {
     try {
         const commitments = [];
@@ -114,6 +132,29 @@ export const fetchCommitments = async (userId) => {
         return [];
     }
 };
+
+export async function fetchSprints() {
+    try {
+        let sprints = [];
+        const sprintsCollection = await firestore()
+            .collection("Sprints")
+            .orderBy("createdOn", "desc")
+            .get();
+        // console.log("Total sprints: ", sprintsCollection.size);
+
+        sprintsCollection.forEach((documentSnapshot) => {
+            sprints.push({
+                ...documentSnapshot.data(),
+                id: documentSnapshot.id,
+            });
+        });
+        // console.log(sprints);
+        return sprints;
+    } catch (error) {
+        console.error("Error fetching sprints collection: ", error);
+    }
+    // console.log(sprints);
+}
 
 export const isReflectionSheetFilledForToday = async (logId) => {
     const data = await firestore()
