@@ -12,12 +12,12 @@ const _layout = () => {
                         headerShown: false,
                     }}
                 />
-                {/* <Stack.Screen
-                    name="AllSprints"
+                <Stack.Screen
+                    name="SprintInformation"
                     options={{
                         headerShown: false,
                     }}
-                /> */}
+                />
             </Stack>
         </>
     );
