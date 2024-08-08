@@ -108,31 +108,6 @@ export const getMonthUtil = (monthNum) => {
     return monthsOfYear[monthNum];
 };
 
-export const fetchCommitments = async (userId) => {
-    try {
-        const commitments = [];
-        const commitmentsCollection = await firestore()
-            .collection("Commitments")
-            .where("userId", "==", userId)
-            .orderBy("createdOn", "desc")
-            .get()
-            .then((querySnapshot) => {
-                // console.log("Total commitments: ", querySnapshot.size);
-                querySnapshot.forEach((documentSnapshot) => {
-                    commitments.push({
-                        commitmentId: documentSnapshot.id,
-                        ...documentSnapshot.data(),
-                    });
-                });
-            });
-        // console.log(commitments);
-        return commitments;
-    } catch (error) {
-        console.log("Error fetching commitments collection: ", error);
-        return [];
-    }
-};
-
 export async function fetchSprints() {
     try {
         let sprints = [];
@@ -193,14 +168,5 @@ export const checkSprintJoinStatus = async (userId) => {
     } catch (error) {
         console.error("Error checking sprint join status: ", error);
         return false;
-    }
-};
-
-export const deleteCommitment = async (commitmentId) => {
-    try {
-        await firestore().collection("Commitments").doc(commitmentId).delete();
-        Alert.alert("Success", "Commitment deleted successfully!");
-    } catch (error) {
-        console.error("Error deleting commitment: ", error);
     }
 };

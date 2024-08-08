@@ -6,22 +6,12 @@ import {
     isReflectionSheetFilledForToday,
 } from "../../../utils/functions";
 import { useUserContext } from "../../../context/UserContext";
+import useCommitments from "../../hooks/useCommitments";
 
 const Home = () => {
-    const [commitments, setCommitments] = useState([]);
     const { user } = useUserContext();
+    const { commitments } = useCommitments(user.id);
     const [isFilled, setIsFilled] = useState(false);
-    useEffect(() => {
-        const fetchCommitmentsData = async () => {
-            try {
-                const commitmentsData = await fetchCommitments(user.id);
-                setCommitments(commitmentsData);
-            } catch (error) {
-                console.error("Error fetching commitments:", error);
-            }
-        };
-        fetchCommitmentsData();
-    }, []);
     useEffect(() => {
         const checkReflection = async () => {
             const filled = await isReflectionSheetFilledForToday(
@@ -30,7 +20,7 @@ const Home = () => {
             setIsFilled(filled);
         };
         checkReflection();
-    }, [commitments]);
+    }, [commitments, isFilled]);
     return (
         <ScrollView className="flex-1">
             <View className="flex-1">
