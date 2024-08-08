@@ -1,7 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useUserContext } from "../context/UserContext";
 import firestore from "@react-native-firebase/firestore";
-import { G } from "react-native-svg";
+import { Alert } from "react-native";
 
 export const printAsyncStorage = () => {
     AsyncStorage.getAllKeys((err, keys) => {
@@ -120,7 +120,7 @@ export const fetchCommitments = async (userId) => {
                 // console.log("Total commitments: ", querySnapshot.size);
                 querySnapshot.forEach((documentSnapshot) => {
                     commitments.push({
-                        commitmentid: documentSnapshot.id,
+                        commitmentId: documentSnapshot.id,
                         ...documentSnapshot.data(),
                     });
                 });
@@ -193,5 +193,14 @@ export const checkSprintJoinStatus = async (userId) => {
     } catch (error) {
         console.error("Error checking sprint join status: ", error);
         return false;
+    }
+};
+
+export const deleteCommitment = async (commitmentId) => {
+    try {
+        await firestore().collection("Commitments").doc(commitmentId).delete();
+        Alert.alert("Success", "Commitment deleted successfully!");
+    } catch (error) {
+        console.error("Error deleting commitment: ", error);
     }
 };
