@@ -25,7 +25,7 @@ const DailyReflectionForm = (props) => {
                 logBook: firestore.FieldValue.arrayUnion(values),
             });
 
-        console.log(values);
+        // console.log(values);
     };
     return (
         <Formik
@@ -37,7 +37,7 @@ const DailyReflectionForm = (props) => {
                 reflection: "",
             }}
             onSubmit={(values, { resetForm }) => {
-                console.log(JSON.stringify(values, null, 2));
+                // console.log(JSON.stringify(values, null, 2));
                 addToFirebase(values);
                 // router.back();
                 console.log("Added the log");

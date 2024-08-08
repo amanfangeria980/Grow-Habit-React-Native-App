@@ -1,10 +1,14 @@
 import { View, Text } from "react-native";
 import React from "react";
+import useCommitments from "../hooks/useCommitments";
+import { useUserContext } from "../../context/UserContext";
 
 const OngoingSprint = () => {
+    const { user } = useUserContext();
+    const { commitments } = useCommitments(user.id);
     return (
-        <View>
-            <Text>OngoingSprint</Text>
+        <View className="flex">
+            <Text className="">OngoingSprint</Text>
         </View>
     );
 };

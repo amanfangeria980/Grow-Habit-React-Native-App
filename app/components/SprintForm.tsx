@@ -13,14 +13,17 @@ let sprintSchema = object({
 });
 
 const SprintForm = (props) => {
-    const { user, setRefreshing, refreshing } = useUserContext();
+    const { user } = useUserContext();
     const addToFirebase = async (values) => {
-        await firestore()
+        const docRef = await firestore()
             .collection("Sprints")
             .add({
                 ...values,
             });
-        setRefreshing(true);
+
+        await docRef.update({
+            sprintId: docRef.id,
+        });
     };
     return (
         <Formik

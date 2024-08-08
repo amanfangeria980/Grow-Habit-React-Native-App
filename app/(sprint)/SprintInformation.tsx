@@ -2,7 +2,7 @@ import { View, Text, TouchableOpacity, Alert } from "react-native";
 import React from "react";
 import { router, useLocalSearchParams } from "expo-router";
 import { Entypo, Ionicons } from "@expo/vector-icons";
-import { getMonthUtil } from "../../utils/functions";
+import { getMonthUtil, isSprintFull } from "../../utils/functions";
 import { useUserContext } from "../../context/UserContext";
 import firestore, { arrayUnion } from "@react-native-firebase/firestore";
 const SprintInformation = () => {
@@ -11,7 +11,6 @@ const SprintInformation = () => {
     const { user } = useUserContext();
     const date = new Date(sprintData.createdOn.seconds * 1000);
     const month = getMonthUtil(date.getMonth() + 1).name;
-
     const handleInvite = () => {
         // Add your invite logic here
         console.log("Invite button pressed");
@@ -25,9 +24,15 @@ const SprintInformation = () => {
                 .doc(user.id)
                 .update({
                     sprintsJoined: firestore.FieldValue.arrayUnion({
-                        sprintId: sprintData.id,
+                        sprintId: sprintData.sprintId,
                         joinedOn: new Date(),
                     }),
+                });
+            await firestore()
+                .collection("Sprints")
+                .doc(sprintData.sprintId)
+                .update({
+                    membersJoined: firestore.FieldValue.arrayUnion(user.id),
                 });
 
             Alert.alert(
@@ -77,7 +82,10 @@ const SprintInformation = () => {
                     className="bg-green-500 p-3 w-24 rounded-lg flex-row items-center justify-center"
                     onPress={handleJoin}
                 >
-                    <Text className="text-white text-center text-base font-semibold">
+                    <Text
+                        className="text-white text-center text-base font-semibold"
+                        disabled={isSprintFull(sprintData)}
+                    >
                         Join{"  "}
                     </Text>
                     <Ionicons name="cloud-done" size={18} color="white" />

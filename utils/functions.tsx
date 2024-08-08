@@ -108,29 +108,6 @@ export const getMonthUtil = (monthNum) => {
     return monthsOfYear[monthNum];
 };
 
-export async function fetchSprints() {
-    try {
-        let sprints = [];
-        const sprintsCollection = await firestore()
-            .collection("Sprints")
-            .orderBy("createdOn", "desc")
-            .get();
-        // console.log("Total sprints: ", sprintsCollection.size);
-
-        sprintsCollection.forEach((documentSnapshot) => {
-            sprints.push({
-                ...documentSnapshot.data(),
-                id: documentSnapshot.id,
-            });
-        });
-        // console.log(sprints);
-        return sprints;
-    } catch (error) {
-        console.error("Error fetching sprints collection: ", error);
-    }
-    // console.log(sprints);
-}
-
 export const isReflectionSheetFilledForToday = async (logId) => {
     const data = await firestore()
         .collection("Logs")
@@ -147,4 +124,9 @@ export const isReflectionSheetFilledForToday = async (logId) => {
     const lastEntry = logBook[logBook.length - 1];
     const logDate = lastEntry.createdOn.toDate().toISOString().split("T")[0];
     return logDate === today;
+};
+
+export const isSprintFull = (data) => {
+    if (data.membersJoined.length <= 8) return false;
+    return true;
 };

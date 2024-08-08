@@ -2,8 +2,9 @@ import { View, Text, TouchableOpacity, FlatList } from "react-native";
 import React, { useEffect, useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
-import { useUserContext } from "../../context/UserContext";
-import { fetchSprints, getMonthUtil } from "../../utils/functions";
+import { getMonthUtil } from "../../utils/functions";
+import useSprints from "../hooks/useSprints";
+import Loading from "./Loading";
 
 const renderSprintItem = ({ item }) => (
     <TouchableOpacity
@@ -37,32 +38,23 @@ const renderSprintItem = ({ item }) => (
         </Text>
         <Text className="text-sm text-gray-500">
             Members Joined:
-            {item.membersJoined.length}
+            {item?.membersJoined?.length || 0}
         </Text>
     </TouchableOpacity>
 );
 
 const AllSprints = () => {
-    const { refreshing, setRefreshing } = useUserContext();
-    const [sprints, setSprints] = useState([]);
-    // const { user } = useUserContext();
-    useEffect(() => {
-        const loadSprints = async () => {
-            const data = await fetchSprints();
-            setSprints(data);
-            setRefreshing(false);
-        };
-        loadSprints();
-    }, [refreshing]);
+    const { sprints, loading } = useSprints();
+    if (loading) return <Loading />;
 
     return (
         <View className="flex-1 p-4">
             <FlatList
                 data={sprints}
                 renderItem={renderSprintItem}
-                keyExtractor={(item) => item.id}
+                keyExtractor={(item) => item.sprintId}
                 ListEmptyComponent={<Text className="mx-auto">No sprints</Text>}
-                showsVerticalScrollIndicator={false} // Hide the scrollbar
+                showsVerticalScrollIndicator={false}
             />
         </View>
     );
