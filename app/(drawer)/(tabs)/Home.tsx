@@ -7,11 +7,7 @@ import {
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import DailyReflectionForm from "../../components/DailyReflectionForm";
-import {
-    checkSprintJoinStatus,
-    fetchCommitments,
-    isReflectionSheetFilledForToday,
-} from "../../../utils/functions";
+import { isReflectionSheetFilledForToday } from "../../../utils/functions";
 import { useUserContext } from "../../../context/UserContext";
 import useCommitments from "../../hooks/useCommitments";
 import Loading from "../../components/Loading";
