@@ -148,25 +148,3 @@ export const isReflectionSheetFilledForToday = async (logId) => {
     const logDate = lastEntry.createdOn.toDate().toISOString().split("T")[0];
     return logDate === today;
 };
-
-export const checkSprintJoinStatus = async (userId) => {
-    try {
-        const userDoc = await firestore().collection("Users").doc(userId).get();
-
-        const userData = userDoc.data();
-        const sprintsJoined = userData.sprintsJoined || [];
-        if (sprintsJoined.length > 0) {
-            const lastSprint = sprintsJoined[sprintsJoined.length - 1];
-
-            const lastSprintJoinMonth = lastSprint.joinedOn.toDate().getMonth();
-            const thisMonth = new Date().getMonth();
-            if (lastSprintJoinMonth >= thisMonth) {
-                return true;
-            }
-        }
-        return false;
-    } catch (error) {
-        console.error("Error checking sprint join status: ", error);
-        return false;
-    }
-};

@@ -3,23 +3,15 @@ import React, { useEffect, useState } from "react";
 import { router } from "expo-router";
 import AllSprints from "../../components/AllSprints";
 import { useUserContext } from "../../../context/UserContext";
-import { checkSprintJoinStatus } from "../../../utils/functions";
 import OngoingSprint from "../../components/OngoingSprint";
 import Loading from "../../components/Loading";
+import useSprintJoinStatus from "../../hooks/useSprintJoinStatus";
 
 const Sprint = () => {
     const { user } = useUserContext();
-    const [sprintJoinedOrNot, setSprintJoinedOrNot] = useState(false);
-    const [loading, setLoading] = useState(true);
-    useEffect(() => {
-        const fetchSprintJoinStatus = async () => {
-            const status = await checkSprintJoinStatus(user.id);
-            setSprintJoinedOrNot(status);
-            setLoading(false);
-        };
-
-        fetchSprintJoinStatus();
-    }, []);
+    const { isJoined: sprintJoinedOrNot, loading } = useSprintJoinStatus(
+        user.id
+    );
     if (loading) return <Loading />;
     return (
         <View className="flex-1 mt-1">
