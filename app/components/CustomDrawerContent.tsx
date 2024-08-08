@@ -1,6 +1,11 @@
 import { DrawerContentScrollView, DrawerItem } from "@react-navigation/drawer";
 import { router, usePathname } from "expo-router";
-import { Feather, Ionicons, AntDesign } from "@expo/vector-icons";
+import {
+    Feather,
+    Ionicons,
+    AntDesign,
+    MaterialCommunityIcons,
+} from "@expo/vector-icons";
 import { View, Image, Text, StyleSheet } from "react-native";
 import { useUserContext } from "../../context/UserContext";
 const CustomDrawerContent = (props) => {
@@ -45,6 +50,27 @@ const CustomDrawerContent = (props) => {
                 }}
                 onPress={() => {
                     router.push("/(drawer)/(tabs)/Home");
+                }}
+            />
+            <DrawerItem
+                label={"Sprint"}
+                labelStyle={[
+                    styles.navItemLabel,
+                    { color: pathname === "/Sprint" ? "white" : "orange" },
+                ]}
+                icon={({ color, size }) => (
+                    <MaterialCommunityIcons
+                        name="run-fast"
+                        size={24}
+                        color={pathname === "/Sprint" ? "white" : "orange"}
+                    />
+                )}
+                style={{
+                    backgroundColor:
+                        pathname === "/Sprint" ? "orange" : "white",
+                }}
+                onPress={() => {
+                    router.push("/(drawer)/(tabs)/Sprint");
                 }}
             />
             <DrawerItem
