@@ -48,13 +48,11 @@ const AllSprints = () => {
     // const { user } = useUserContext();
     useEffect(() => {
         const loadSprints = async () => {
-            const data = await fetchSprints(); // Wait for the data to be fetched
-            setSprints(data); // Update the state with the fetched data
-            // console.log(JSON.stringify(sprints, null, 2));
+            const data = await fetchSprints();
+            setSprints(data);
             setRefreshing(false);
         };
         loadSprints();
-        // setRefreshing(false);
     }, [refreshing]);
 
     return (
